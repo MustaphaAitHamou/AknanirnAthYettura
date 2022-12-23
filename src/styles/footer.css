@@ -1,6 +1,7 @@
 .footer{
     padding: 50px 0px;
     background: #fde4e4;
+    background: #fde4e4;
 }
 
 .footer__logo img{
@@ -66,7 +67,7 @@
 }
 
 .newsletter span{
-    background: #212245;
+    background: #df2020;
     padding: 5px 30px;
     border-radius: 5px;
 }
@@ -77,4 +78,16 @@
 
 .newsletter input::placeholder{
     color: #212245;
+}
+
+.social__links span i{
+    padding: 5px;
+    background: #df2020;
+    color: #fff;
+    border-radius: 50%;
+}
+
+.copyright__text{
+    font-size: .8rem;
+    color: #df2020;
 }

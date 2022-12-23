@@ -66,16 +66,20 @@ const Footer = () => {
 
       </Row>
 
-      <Row>
+      <Row className='mt-5'>
         <Col lg='6' md='6'>
-          <p>Copyright - 2022, Site web développé par Aknanir nAth Yettura. 
+          <p className='copyright__text'>
+            Copyright - 2022, Site web développé par Aknanir nAth Yettura. 
             Tous droits reservés.</p>
         </Col>
 
         <Col lg='6' md='6'>
-        <div className='social__links'>
-          <p>Follow: </p>
-          <span> <Link to='www.facebook.com'>
+        <div className='social__links d-flex align-items-center gap-4
+        justify-content-end'>
+          <p className='m-0'>Follow: </p>
+          <span> 
+            {" "}
+            <Link to='www.facebook.com'>
             <i className="ri-facebook-line"></i></Link> </span>
 
             <span> <Link to='www.github.com'>
