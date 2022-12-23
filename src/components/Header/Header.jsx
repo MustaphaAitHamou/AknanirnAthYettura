@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 
 import { Container } from "reactstrap";
 import logo from '../../assets/images/res-logo.png';
@@ -28,6 +28,9 @@ const nav__links = [
 
 
 const Header = () => {
+
+  const menuRef = useRef(null);
+  const toggleMenu = ()=> menuRef.current.classList.toggle('show__menu');
   return <header className="header">
 
     <Container>
@@ -43,7 +46,9 @@ const Header = () => {
           <div className="menu d-flex align-items-center gap-5">
             {
               nav__links.map((item, index) => (
-                <NavLink to={item.path} 
+                <NavLink 
+                onClick={toggleMenu}
+                to={item.path} 
                 key={index}
                 className={navClass => 
                 navClass.isActive ? "active__menu" : ''}
@@ -65,7 +70,7 @@ const Header = () => {
             <Link to='/login'><i className="ri-user-line"></i></Link>
           </span>
 
-          <span className="mobile__menu">
+          <span className="mobile__menu" onClick={toggleMenu}>
             <i className="ri-menu-line"></i>
           </span>
         </div>
