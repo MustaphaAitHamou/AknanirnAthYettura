@@ -80,7 +80,7 @@ const Footer = () => {
           <span> 
             {" "}
             <Link to='www.facebook.com'>
-            <i className="ri-facebook-line"></i></Link> </span>
+            <i className="ri-facebook-line"></i></Link>{" "} </span>
 
             <span> <Link to='www.github.com'>
             <i className="ri-github-line"></i></Link> </span>
