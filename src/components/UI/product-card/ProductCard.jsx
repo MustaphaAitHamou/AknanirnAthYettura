@@ -4,9 +4,25 @@ import '../../../styles/product-card.css'
 
 import { Link } from 'react-router-dom'
 
+import { useDispatch } from 'react-redux'
+import { cartActions } from '../../../store/shopping-cart/cartSlice'
+
+
 const ProductCard = (props) => {
 
-    const {id, title, image01, price} = props.item
+    const {id, title, image01, price} = props.item;
+    const dispatch = useDispatch()
+
+    const addToCart = ()=>{
+      dispatch(
+        cartActions.addItem({
+        id,
+        title,
+        image01,
+        price,
+      })
+      );
+    };
   return(
     <div className='product__item' >
           <div className="product__img">
@@ -20,7 +36,7 @@ const ProductCard = (props) => {
                 </div>
                 <div className='d-flex align-items-center justify-content-between'>
                     <span className='product__price'>{price}€</span>
-                    <button className='addTOCart__btn'>Ajouter au panier</button>
+                    <button className='addTOCart__btn' onClick={addToCart}>Ajouter au panier</button>
                 </div>
           </div>
     </div>
