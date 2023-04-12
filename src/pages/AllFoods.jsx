@@ -1,17 +1,41 @@
 import React, { useState, useEffect }from 'react'
 import Helmet from '../components/Helmet/Helmet'
 import CommonSection from '../components/UI/common-section/CommonSection'
+import ReactPaginate from 'react-paginate';
 
 import { Container, Row, Col } from "reactstrap";
 
 import products from '../assets/fake-data/products';
 import ProductCard from '../components/UI/product-card/ProductCard';
 import '../styles/all-foods.css';
+import '../styles/pagination.css'
 
 const AllFoods = () => {
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [productData, setProductData] = useState(products);
+
+  const [pageNumber, setPageNumber] = useState(0);
+  const searchedProduct = products.filter(item=>{
+    if(searchTerm.value === ""){
+      return item;
+    }
+    
+    if(item.title.toLowerCase().includes(searchTerm.toLowerCase())){
+      return item;
+    }
+  })
+  const productPerPage = 8;
+  const visitedPage = pageNumber * productPerPage
+  const displayPage = searchedProduct.slice(
+    visitedPage, 
+    visitedPage + productPerPage
+  );
+
+  const pageCount = Math.ceil(searchedProduct.length / productPerPage);
+
+  const changePage = ({selected})=>{
+    setPageNumber(selected)
+  }
 
   return (
      <Helmet title='All-Foods'>
@@ -39,22 +63,27 @@ const AllFoods = () => {
               </div>
             </Col>
 
-            {productData.filter(item=>{
-              if(searchTerm.value === ""){
-                return item;
-              }
-              
-              if(item.title.toLowerCase().includes(searchTerm.toLowerCase())){
-                return item;
-              }
-            })
+            {displayPage
             .map((item) => (
-              
               <Col lg='3' md='4' sm='6' xs='6' key={item.id} className='mb-4'>
                 <ProductCard item={item} key={item.id}/>
               </Col>
               
             ))}
+
+              <div>
+                <ReactPaginate 
+                pageCount={pageCount}
+                onPageChange={changePage}
+                previousLabel="Prev"
+                nextLabel="Next"
+                containerClassName='paginationBtns'
+                />
+
+                
+              </div>
+
+
           </Row>
         </Container>
       </section>
