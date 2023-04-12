@@ -1,9 +1,64 @@
-import React from 'react'
+import React, { useState, useEffect }from 'react'
+import Helmet from '../components/Helmet/Helmet'
+import CommonSection from '../components/UI/common-section/CommonSection'
+
+import { Container, Row, Col } from "reactstrap";
+
+import products from '../assets/fake-data/products';
+import ProductCard from '../components/UI/product-card/ProductCard';
+import '../styles/all-foods.css';
 
 const AllFoods = () => {
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [productData, setProductData] = useState(products);
+
   return (
-    <div>AllFoods</div>
-  )
-}
+     <Helmet title='All-Foods'>
+      <CommonSection title='All Foods'/>
+
+      <section>
+        <Container>
+          <Row>
+            <Col lg='6' md='6' sm='6'>
+              <div className="search__widget d-flex align-items-center justify-content-between w-50">
+                <input type="text" placeholder='Je recherche...'value={searchTerm} onChange={e=> setSearchTerm()}/>
+                <span><i className="ri-search-line"></i></span>
+              </div>
+            </Col>
+
+            <Col lg='6' md='6' sm='6' className="mb-5">
+              <div className="sorting__widget text-end">
+                <select className='w-50 '>
+                  <option>Default</option>
+                  <option value="ascending">A-Z</option>
+                  <option value="descending">Z-A</option>
+                  <option value="high-price">+ Au - Chère</option>
+                  <option value="low-price">- Au + Chère</option>
+                </select>
+              </div>
+            </Col>
+
+            {productData.filter(item=>{
+              if(searchTerm.value === ""){
+                return item;
+              }
+              
+              if(item.title.toLowerCase().includes(searchTerm.toLowerCase())){
+                return item;
+              }
+            })
+            .map((item) => (
+              
+              <Col lg='3' md='4' sm='6' xs='6' key={item.id} className='mb-4'>
+                <ProductCard item={item} key={item.id}/>
+              </Col>
+              
+            ))}
+          </Row>
+        </Container>
+      </section>
+    </Helmet>
+)}
 
 export default AllFoods
