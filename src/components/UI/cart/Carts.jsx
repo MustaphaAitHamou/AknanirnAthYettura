@@ -12,7 +12,7 @@ const Carts = () => {
 
     const dispatch = useDispatch();
     const cartProducts = useSelector(state=> state.cart.cartItems);
-
+    const totalAmount = useSelector(state => state.cart.totalAmount);
     const toggleCart = ()=>{
         dispatch(cartUiActions.toggle());
     };
@@ -34,7 +34,7 @@ const Carts = () => {
             </div>
 
             <div className="cart__bottom d-flex align-items-center justify-content-between">
-                <h6>Subtotal amount: <span>123€</span></h6>
+                <h6>Subtotal amount: <span>{totalAmount}€</span></h6>
                 <button><Link to='checkout'>Checkout</Link></button>
             </div>
         </ListGroup>
