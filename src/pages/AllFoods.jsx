@@ -1,14 +1,17 @@
-import React, { useState, useEffect }from 'react'
-import Helmet from '../components/Helmet/Helmet'
-import CommonSection from '../components/UI/common-section/CommonSection'
-import ReactPaginate from 'react-paginate';
+import React, { useState } from "react";
+import Helmet from "../components/Helmet/Helmet";
+import CommonSection from "../components/UI/common-section/CommonSection";
 
 import { Container, Row, Col } from "reactstrap";
 
-import products from '../assets/fake-data/products';
-import ProductCard from '../components/UI/product-card/ProductCard';
-import '../styles/all-foods.css';
-import '../styles/pagination.css'
+import products from "../assets/fake-data/products";
+import ProductCard from "../components/UI/product-card/ProductCard";
+import ReactPaginate from "react-paginate";
+
+import "../styles/all-foods.css";
+import "../styles/pagination.css";
+
+
 
 const AllFoods = () => {
 
@@ -24,18 +27,21 @@ const AllFoods = () => {
       return item;
     }
   })
-  const productPerPage = 8;
-  const visitedPage = pageNumber * productPerPage
+
+  const productPerPage = 12;
+  const visitedPage = pageNumber * productPerPage;
   const displayPage = searchedProduct.slice(
-    visitedPage, 
+    visitedPage,
     visitedPage + productPerPage
   );
 
   const pageCount = Math.ceil(searchedProduct.length / productPerPage);
 
-  const changePage = ({selected})=>{
-    setPageNumber(selected)
-  }
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
+  
 
   return (
      <Helmet title='All-Foods'>
@@ -44,9 +50,9 @@ const AllFoods = () => {
       <section>
         <Container>
           <Row>
-            <Col lg='6' md='6' sm='6'>
-              <div className="search__widget d-flex align-items-center justify-content-between w-50">
-                <input type="text" placeholder='Je recherche...'value={searchTerm} onChange={e=> setSearchTerm()}/>
+          <Col lg="6" md="6" sm="6">
+          <div className="search__widget d-flex align-items-center justify-content-between ">
+                <input type="text" placeholder='Je recherche...'value={searchTerm} onChange={e=> setSearchTerm(e.target.value)}/>
                 <span><i className="ri-search-line"></i></span>
               </div>
             </Col>
@@ -91,3 +97,12 @@ const AllFoods = () => {
 )}
 
 export default AllFoods
+
+
+
+
+
+
+
+
+
