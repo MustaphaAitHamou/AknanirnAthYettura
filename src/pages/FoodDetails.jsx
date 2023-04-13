@@ -24,17 +24,17 @@ const FoodDetails = () => {
         <Container>
           <Row>
             <Col lg='2' md='2'>
-              <div className='product__images'>
-              <div className="img__item">
-                <img src={productImg} alt="" className='w-100' />
+            <div className='product__images'>
+              <div className="img__item" onClick={() => setPreviewImg(product.image01)}>
+                <img src={product.image01} alt="" className='w-100' />
               </div>
               
-              <div className="img__item">
-                <img src={productImg} alt="" className='w-100' />
+              <div className="img__item" onClick={() => setPreviewImg(product.image02)}>
+                <img src={product.image02} alt="" className='w-100' />
               </div>
               
-              <div className="img__item">
-                <img src={productImg} alt="" className='w-100' />
+              <div className="img__item" onClick={() => setPreviewImg(product.image02)}>
+                <img src={product.image03} alt="" className='w-100' />
               </div>
 
               </div>
