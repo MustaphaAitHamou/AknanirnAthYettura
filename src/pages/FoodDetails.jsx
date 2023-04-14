@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import Helmet from '../components/Helmet/Helmet';
 import CommonSection from '../components/UI/common-section/CommonSection';
 import { Container, Row, Col } from 'reactstrap';
+import { useDispatch } from 'react-redux';
+import { cartActions } from '../store/shopping-cart/cartSlice';
 
 import '../styles/product-details.css';
 
@@ -12,16 +14,37 @@ import ProductCard from '../components/UI/product-card/ProductCard';
 const FoodDetails = () => {
 
   const [tab, setTab] = useState('desc');
+  const [enteredName, setEnteredName] = useState('');
+  const [enteredEmail, setEnteredEmail] = useState('');
+  const [reviewMsg, setReviewMsg] = useState('');
   const {id} = useParams();
+  const dispatch = useDispatch();
   
   const product = products.find(product=> product.id === id);
   const [previewImg, setPreviewImg] = useState(product.image01);
-  const {title, price, category, desc} = product;
+  const {title, price, category, desc, image01} = product;
 
   const relatedProduct = products.filter(item=> category === item.category);
 
+  const addItem = ()=>{
+    dispatch(cartActions.addItem({
+      id,
+      title,
+      price,
+      image01
+    }));
+  };
+
+  const submitHandler = e=>{
+    e.preventDefault()
+  }
+
   useEffect(()=>{
     setPreviewImg(product.image01)
+  },[product]);
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
   },[product])
 
   return <Helmet title='Product-details'>
@@ -54,11 +77,11 @@ const FoodDetails = () => {
             </Col>
             <Col lg='6' md='6'>
               <div className="single__product-content">
-                <h2 className='product__title'>Pizza with mushroom</h2>
+                <h2 className='product__title'>{title}</h2>
                 <span className='product__price'>Prix :<span>{price}€</span></span>
                 <p>Catégorie : <span>{category}</span></p>
 
-                <button className='addTOCart__btn'>Add to Cart</button>
+                <button onClick={addItem} className='addTOCart__btn'>Add to Cart</button>
               </div>
             </Col>
 
@@ -88,17 +111,20 @@ const FoodDetails = () => {
                   <p className='review__text'>Great Product</p>
                 </div>
                 
-                <form className='form'>
+                <form className='form' onSubmit={submitHandler}>
                   <div className="form__group">
-                    <input type="text" placeholder='Entrez votre nom'/>
+                    <input type="text" placeholder='Entrez votre nom'
+                    onChange={e=> setEnteredName(e.target.value)} required/>
                   </div>
 
                   <div className="form__group">
-                    <input type="text" placeholder='Entrez votre nom'/>
+                    <input type="text" placeholder='Entrez votre email'
+                    onChange={e=> setEnteredEmail(e.target.value)} required/>
                   </div>
 
                   <div className="form__group">
-                    <textarea rows={5} type="text" placeholder='Entrez votre nom'/>
+                    <textarea rows={5} type="text" placeholder='Écrivez votre avis'
+                    onChange={e=> setReviewMsg(e.target.value)} required/>
                   </div>
 
                   <button type='submit' className='addTOCart__btn'>Submit</button>
