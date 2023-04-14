@@ -21,3 +21,9 @@ th {
 .cart__subtotal {
     color: #df2020;
 }
+
+@media only screen and (max-width:768px) {
+    th, td {
+        font-size: .8rem;
+    }
+}
