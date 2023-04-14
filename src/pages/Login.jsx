@@ -32,7 +32,7 @@ const Login = () => {
               </div>
               <button type='submit' className="addTOCart__btn">Login</button>
             </form>
-            <Link to='/register'>Alread have an account ? Create an account</Link>
+            <Link to='/register'>Don't have an account ? Create an account</Link>
           </Col>
         </Row>
       </Container>
